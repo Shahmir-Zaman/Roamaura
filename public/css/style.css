@@ -107,3 +107,112 @@ body{
 .show-card .card-body p {
     line-height: 3vh;
 }
+
+/* Card Animations */
+.card {
+    border: none !important;
+    width: 18rem;
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar Link Animations */
+.nav-link {
+    color: #222222 !important;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #fe424d;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Social Icons Animation */
+.f-info-socials i {
+    font-size: 1.3rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.f-info-socials i:hover {
+    transform: scale(1.2);
+    color: #fe424d;
+}
+
+/* Button Animations */
+.btn {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Input Animations */
+.form-control {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #fe424d;
+    box-shadow: 0 0 0 0.2rem rgba(254, 66, 77, 0.25);
+}
+
+/* Page Load Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* Show Page Image Animation */
+.show-img {
+    transition: transform 0.5s ease;
+}
+
+.show-img:hover {
+    transform: scale(1.02);
+}
+
+/* Price Tag Animation */
+.card-text {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-text b {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.card-text:hover b {
+    transform: scale(1.05);
+    color: #fe424d;
+}
