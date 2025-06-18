@@ -6,7 +6,7 @@
     <div class="heading mt-3">
     <h1>Create a New Listing</h1>
     </div>
-    <form method="POST" action="/listings">
+    <form method="POST" action="/listings" novalidate class="needs-validation">
       <div class="mb-3 mt-3">
         <label for="title" class="form-label">Title</label>
         <input
@@ -14,7 +14,9 @@
           placeholder="Enter a catchy Title"
           type="text"
           class="form-control"
+          required
         />
+        <div class="invalid-feedback">Please enter a valid Title</div>
       </div>
 
       <div class="mb-3">
@@ -22,7 +24,9 @@
       <textarea
         name="listing[description]"
         class="form-control"
+        required
       ></textarea>
+      <div class="invalid-feedback">Please enter a valid Description</div>
       </div>
 
       <div class="mb-3">
@@ -32,13 +36,15 @@
         placeholder="Enter Image URl"
         type="text"
         class="form-control"
+
       />
       </div>
 
       <div class="row">
       <div class="mb-3 col-md-4">
       <label for="Price" class="form-label">Price</label>
-      <input name="listing[price]" placeholder="Enter Price" type="number" class="form-control" />
+      <input name="listing[price]" placeholder="Enter Price" type="number" class="form-control" required/> 
+      <div class="invalid-feedback"> Please enter a valid Price</div>
       </div>
 
       <div class="mb-3 col-md-8"> 
@@ -48,7 +54,9 @@
         placeholder="Enter Country Name"
         type="text"
         class="form-control" 
+        required
       />
+      <div class="invalid-feedback">Please enter a valid Country </div>
       </div>
       </div>
 
@@ -59,7 +67,9 @@
         placeholder="Enter Location"
         type="text"
         class="form-control" 
+        required
       />
+      <div class="invalid-feedback">Please enter a valid Location</div>
       </div>
 
       <div class="mb-3">
