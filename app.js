@@ -7,6 +7,7 @@ const methodOverride = require("method-override");
 const ejsMate=require("ejs-mate"); 
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
+const {listingSchema, lsitingSchema} =require("./schema.js")
 
 //Connecting to MongoDB
 const MONGO_URL="mongodb://127.0.0.1:27017/roamora";
@@ -33,7 +34,19 @@ app.use(express.static(path.join(__dirname,"public"))); // to use public folder 
 
 app.get("/",(req,res) =>{
     res.send("Hi, I am root")
-})
+});
+
+const validateListing=(req,res,next) =>{
+        let {error} = lsitingSchema.validate(req.body); // Validate the request body against the schema
+        if(error){
+            let errMsg= error.details.map((el) => el.message).join(", ");
+            throw new ExpressError(400, result.error);
+        } else{
+            next();
+        }
+};
+
+
 
 //New Route
 app.get("/listings/new",(req,res) =>{
@@ -41,18 +54,16 @@ app.get("/listings/new",(req,res) =>{
 });
 
 //Create Route
-app.post("/listings",
+app.post("/listings",validateListing,
     wrapAsync(async (req,res,next) =>{
-        if(!req.body.lsiting){
-            throw new ExpressError(400, "Invalid Listing Data");
-        }
+
         const newListing = new Listing(req.body.listing);
         await newListing.save();
         res.redirect("/listings");
 }));
 
 //Edit Route
-app.get("/listings/:id/edit", Wrapaync(async(req,res)=>{
+app.get("/listings/:id/edit", wrapAsync(async(req,res)=>{
     let {id} =req.params;
     const listing= await Listing.findById(id);
     res.render("listings/edit.ejs",{listing});
@@ -61,20 +72,20 @@ app.get("/listings/:id/edit", Wrapaync(async(req,res)=>{
 
 
 //Index Route
-app.get("/listings",Wrapsync(async (req, res) => {
+app.get("/listings",wrapAsync(async (req, res) => {
     const allListings = await Listing.find({});
     res.render("listings/index.ejs",{allListings});
 }));
 
 //Show Route
-app.get("/listings/:id", Wrapaync (async (req,res) =>{
+app.get("/listings/:id", wrapAsync (async (req,res) =>{
     let {id} =req.params;
     const listing= await Listing.findById(id);
     res.render("listings/show.ejs",{listing});
 }));
 
 //Update Route
-app.put("/listings/:id", Wrapasync(async(req,res)=>{
+app.put("/listings/:id", wrapAsync(async(req,res)=>{
         if(!req.body.lsiting){
             throw new ExpressError(400, "Invalid Listing Data");
         }
@@ -86,7 +97,7 @@ app.put("/listings/:id", Wrapasync(async(req,res)=>{
 }));
 
 //Delete Route
-app.delete("/listings/:id", Wrapasync(async(req,res)=>{
+app.delete("/listings/:id", wrapAsync(async(req,res)=>{
     let {id}=req.params;
     let deletedListing=await Listing.findByIdAndDelete(id);
     console.log(deletedListing);
@@ -100,7 +111,8 @@ app.all("*",(req,res,next) =>{
 
 app.use((err,req,res,next) =>{
     let {statusCode = 500, message = "Something went wrong!"} = err;
-    res.status(statusCode).send(message); // <-- also fixed: use res.status()
+    res.status(statusCode).render('listings/error.ejs',{err})
+    //res.status(statusCode).send(message); // <-- also fixed: use res.status()
 });
 
 app.listen(8080,() =>{
