@@ -5,6 +5,9 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate=require("ejs-mate"); 
 const ExpressError = require("./utils/ExpressError.js");
+const session= require("express-session");
+const flash= require("connect-flash");
+
 
 const listing= require("./routes/listing.js"); // Import the listings route
 const reviews = require("./routes/review.js"); // Import the reviews route
@@ -32,12 +35,31 @@ app.use(methodOverride("_method"));
 app.engine("ejs",ejsMate); // to use ejs-mate as the template engine
 app.use(express.static(path.join(__dirname,"public"))); // to use public folder as static files
 
+const sessionOptions={
+    secret: "MySuperSecretKey",
+    resave: false,
+    saveUninitialized: true,
+    cookie:{
+        exepires:Date.now() + 7*24*60*60*1000, 
+        maxAge: 7*24*60*60*1000,
+        httpOnly:true,
+    }
+}
 
-app.get("/",(req,res) =>{
+app.get("/",(req,res) =>{s
     res.send("Hi, I am root")
 });
 
 
+app.use(session(sessionOptions));
+app.use(flash());
+
+app.use((req, res, next) => {
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    console.log(res.locals.success);
+    next();
+});
 
 app.use("/listings",listing); // Use the listings route
 app.use("/listings/:id/reviews", reviews); // Use the reviews route

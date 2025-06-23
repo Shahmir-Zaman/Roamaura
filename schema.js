@@ -1,12 +1,12 @@
 const Joi = require('joi');
 
-module.exports.lsitingSchema= Joi.object({
+module.exports.listingSchema= Joi.object({
     listing : Joi.object({
         title: Joi.string().required(),
         description: Joi.string().required(),
         location: Joi.string().required(),
         price: Joi.number().required(),
-        countr: Joi.string().required().min(0),
+        country: Joi.string().required(),
         image: Joi.string().allow("",null)
     }).required()
 })
