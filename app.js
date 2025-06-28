@@ -71,22 +71,14 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
+    res.locals.currUser = req.user;
     next();
 });
 
 app.get("/",(req,res) =>{s
     res.send("Hi, I am root")
 });
-// app.get("/demouser", async(req,res)=>{
-//     let fakeUser= new User({
-//         email:"meow@meow",
-//         username: "demoUser",
-//     });
 
-//     let registeredUser = await User.register(fakeUser,"meow");
-//     res.send(registeredUser);
-
-// })
 
 app.use("/listings",listingRouter); // Use the listings route
 app.use("/listings/:id/reviews", reviewRouter); // Use the reviews route
