@@ -22,11 +22,33 @@ module.exports.showListing = async (req, res) => {
 
 // Create a new listing
 module.exports.createLisitng = async (req, res, next) => {
-  const newListing = new Listing(req.body.listing);
-  newListing.owner = req.user._id;
-  await newListing.save();
-  req.flash("success", "New listing Created!");
-  res.redirect("/listings");
+  try {
+    console.log("Request body:", req.body);
+    console.log("Request file:", req.file);
+    
+    if (!req.file) {
+      req.flash("error", "Please upload an image!");
+      return res.redirect("/listings/new");
+    }
+
+    let url = req.file.path;
+    let filename = req.file.filename;
+
+    const newListing = new Listing(req.body.listing);
+    newListing.owner = req.user._id;
+    newListing.image = { url, filename };
+    
+    console.log("New listing before save:", newListing);
+    await newListing.save();
+    console.log("New listing saved successfully!");
+    
+    req.flash("success", "New listing Created!");
+    res.redirect("/listings");
+  } catch (error) {
+    console.error("Error creating listing:", error);
+    req.flash("error", "Error creating listing: " + error.message);
+    res.redirect("/listings/new");
+  }
 };
 
 // Updating a listing
