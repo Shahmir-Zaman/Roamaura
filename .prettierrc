@@ -1,7 +1,28 @@
 {
-  "plugins": ["prettier-plugin-tailwindcss"],
   "semi": true,
   "singleQuote": true,
   "tabWidth": 2,
-  "trailingComma": "es5"
+  "useTabs": false,
+  "trailingComma": "es5",
+  "printWidth": 80,
+  "bracketSpacing": true,
+  "arrowParens": "avoid",
+  "endOfLine": "lf",
+  "overrides": [
+    {
+      "files": "*.ejs",
+      "options": {
+        "parser": "html",
+        "printWidth": 120,
+        "tabWidth": 2
+      }
+    },
+    {
+      "files": "*.json",
+      "options": {
+        "tabWidth": 2,
+        "trailingComma": "none"
+      }
+    }
+  ]
 }

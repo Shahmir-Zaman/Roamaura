@@ -4,6 +4,7 @@
 <img src="readmeai/assets/logos/purple.svg" width="30%" align="left" style="margin-right: 15px">
 
 # ROAMAURA
+
 <em></em>
 
 <!-- BADGES -->
@@ -28,12 +29,12 @@
 - [🌞 Overview](#-overview)
 - [🔥 Features](#-features)
 - [🌅 Project Structure](#-project-structure)
-    - [🌄 Project Index](#-project-index)
+  - [🌄 Project Index](#-project-index)
 - [🚀 Getting Started](#-getting-started)
-    - [🌟 Prerequisites](#-prerequisites)
-    - [⚡ Installation](#-installation)
-    - [🔆 Usage](#-usage)
-    - [🌠 Testing](#-testing)
+  - [🌟 Prerequisites](#-prerequisites)
+  - [⚡ Installation](#-installation)
+  - [🔆 Usage](#-usage)
+  - [🌠 Testing](#-testing)
 - [🌻 Roadmap](#-roadmap)
 - [🤝 Contributing](#-contributing)
 - [📜 License](#-license)
@@ -43,16 +44,14 @@
 
 ## 🌞 Overview
 
-
-
 ---
 
 ## 🔥 Features
 
-|      | Component       | Details                              |
-| :--- | :-------------- | :----------------------------------- |
-| ⚙️  | **Architecture**  | <ul><li>Node.js + Express MVC pattern</li><li>Separation of routes, controllers, and views</li><li>Middleware pipeline for request handling</li></ul> |
-| 🔩 | **Code Quality**  | <ul><li>No linter/configs detected</li><li>Basic code structure with minimal comments</li><li>Legacy patterns in authentication flow</li></ul> |
+|     | Component        | Details                                                                                                                                               |
+| :-- | :--------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ⚙️  | **Architecture** | <ul><li>Node.js + Express MVC pattern</li><li>Separation of routes, controllers, and views</li><li>Middleware pipeline for request handling</li></ul> |
+| 🔩  | **Code Quality** | <ul><li>No linter/configs detected</li><li>Basic code structure with minimal comments</li><li>Legacy patterns in authentication flow</li></ul>        |
 
 ---
 
@@ -534,44 +533,47 @@ Build Roamaura from the source and intsall dependencies:
 
 1. **Clone the repository:**
 
-    ```sh
-    ❯ git clone ../Roamaura
-    ```
+   ```sh
+   ❯ git clone ../Roamaura
+   ```
 
 2. **Navigate to the project directory:**
 
-    ```sh
-    ❯ cd Roamaura
-    ```
+   ```sh
+   ❯ cd Roamaura
+   ```
 
 3. **Install the dependencies:**
 
 <!-- SHIELDS BADGE CURRENTLY DISABLED -->
-	<!-- [![npm][npm-shield]][npm-link] -->
-	<!-- REFERENCE LINKS -->
-	<!-- [npm-shield]: https://img.shields.io/badge/npm-CB3837.svg?style={badge_style}&logo=npm&logoColor=white -->
-	<!-- [npm-link]: https://www.npmjs.com/ -->
 
-	**Using [npm](https://www.npmjs.com/):**
+    <!-- [![npm][npm-shield]][npm-link] -->
+    <!-- REFERENCE LINKS -->
+    <!-- [npm-shield]: https://img.shields.io/badge/npm-CB3837.svg?style={badge_style}&logo=npm&logoColor=white -->
+    <!-- [npm-link]: https://www.npmjs.com/ -->
 
-	```sh
-	❯ npm install
-	```
+    **Using [npm](https://www.npmjs.com/):**
+
+    ```sh
+    ❯ npm install
+    ```
 
 ### 🔆 Usage
 
 Run the project with:
 
 **Using [npm](https://www.npmjs.com/):**
+
 ```sh
 npm start
 ```
 
 ### 🌠 Testing
 
-Roamaura uses the {__test_framework__} test framework. Run the test suite with:
+Roamaura uses the {**test_framework**} test framework. Run the test suite with:
 
 **Using [npm](https://www.npmjs.com/):**
+
 ```sh
 npm test
 ```
@@ -580,7 +582,7 @@ npm test
 
 ## 🌻 Roadmap
 
-- [X] **`Task 1`**: <strike>Implement feature one.</strike>
+- [x] **`Task 1`**: <strike>Implement feature one.</strike>
 - [ ] **`Task 2`**: Implement feature two.
 - [ ] **`Task 3`**: Implement feature three.
 
@@ -645,8 +647,6 @@ Roamaura is protected under the [LICENSE](https://choosealicense.com/licenses) L
 
 </div>
 
-
 [back-to-top]: https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square
-
 
 ---

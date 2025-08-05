@@ -12,18 +12,18 @@ Roamaura is a modern web platform for discovering, listing, and managing unique 
 
 ## Features Table
 
-|      | Component       | Details                              |
-| :--- | :-------------- | :----------------------------------- |
+|     | Component         | Details                                                                                                |
+| :-- | :---------------- | :----------------------------------------------------------------------------------------------------- |
 | ⚙️  | **Architecture**  | <ul><li>MVC pattern</li><li>Express.js server</li><li>MongoDB backend</li><li>EJS templating</li></ul> |
-| 🔩 | **Code Quality**  | <ul><li>Modular routes</li><li>Schema validation</li><li>Async error handling</li></ul> |
-| 📄 | **Documentation** | <ul><li>README overview</li><li>Clear folder structure</li></ul> |
-| 🔌 | **Integrations**  | <ul><li>Passport.js authentication</li><li>Bootstrap 5 UI</li></ul> |
-| 🧩 | **Modularity**    | <ul><li>Separation of models, routes, utils</li><li>Reusable middleware</li></ul> |
-| 🧪 | **Testing**       | <ul><li>No automated tests present</li></ul> |
-| ⚡️  | **Performance**   | <ul><li>Efficient MongoDB queries</li><li>Static asset serving</li></ul> |
-| 🛡️ | **Security**      | <ul><li>Session management</li><li>Input validation with Joi</li><li>Authentication</li></ul> |
-| 📦 | **Dependencies**  | <ul><li>express</li><li>mongoose</li><li>passport</li><li>ejs</li><li>joi</li></ul> |
-| 🚀 | **Scalability**   | <ul><li>Modular codebase</li><li>MongoDB scalability</li></ul> |
+| 🔩  | **Code Quality**  | <ul><li>Modular routes</li><li>Schema validation</li><li>Async error handling</li></ul>                |
+| 📄  | **Documentation** | <ul><li>README overview</li><li>Clear folder structure</li></ul>                                       |
+| 🔌  | **Integrations**  | <ul><li>Passport.js authentication</li><li>Bootstrap 5 UI</li></ul>                                    |
+| 🧩  | **Modularity**    | <ul><li>Separation of models, routes, utils</li><li>Reusable middleware</li></ul>                      |
+| 🧪  | **Testing**       | <ul><li>No automated tests present</li></ul>                                                           |
+| ⚡️ | **Performance**   | <ul><li>Efficient MongoDB queries</li><li>Static asset serving</li></ul>                               |
+| 🛡️  | **Security**      | <ul><li>Session management</li><li>Input validation with Joi</li><li>Authentication</li></ul>          |
+| 📦  | **Dependencies**  | <ul><li>express</li><li>mongoose</li><li>passport</li><li>ejs</li><li>joi</li></ul>                    |
+| 🚀  | **Scalability**   | <ul><li>Modular codebase</li><li>MongoDB scalability</li></ul>                                         |
 
 ---
 
@@ -41,6 +41,7 @@ Roamaura empowers users to explore and share extraordinary stays with ease. The 
 ---
 
 ## Project Structure
+
 Roamaura/ ├── app.js ├── middleware.js ├── package.json ├── README.md ├── schema.js ├── init/ │ ├── data.js │ └── index.js ├── models/ │ ├── listing.js │ ├── review.js │ └── user.js ├── public/ │ ├── css/ │ │ └── style.css │ └── js/ │ └── script.js ├── routes/ │ ├── listing.js │ ├── review.js │ └── user.js ├── utils/ │ ├── ExpressError.js │ └── wrapAsync.js └── views/ ├── includes/ │ ├── flash.ejs │ ├── footer.ejs │ └── navbar.ejs ├── layouts/ │ └── boilerplate.ejs ├── listings/ │ ├── edit.ejs │ ├── error.ejs │ ├── index.ejs │ ├── new.ejs │ └── show.ejs └── users/ ├── login.ejs └── signup.ejs
 
 ---
@@ -49,10 +50,12 @@ Roamaura/ ├── app.js ├── middleware.js ├── package.json ├─
 
 1. **Clone the repository:**
 2. git clone https://github.com/Shahmir-Zaman/roamaura.git cd roamaura
+
 ---
+
 2. **Install dependencies:**
-   
 3. **Set up MongoDB:**
+
 - Ensure MongoDB is running locally at `mongodb://127.0.0.1:27017/roamora`
 - (Optional) Seed the database with sample data:
   ```
@@ -60,10 +63,10 @@ Roamaura/ ├── app.js ├── middleware.js ├── package.json ├─
   ```
 
 4. **Start the server:**
- node app.js
-
+   node app.js
 
 5. **Visit the app:**
+
 - Open [http://localhost:8080](http://localhost:8080) in your browser.
 
 ---

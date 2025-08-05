@@ -1,5 +1,5 @@
-const express = require("express");
+const express = require('express');
 
 module.exports.renderHome = (req, res) => {
-    res.render("landing/home.ejs");
+  res.render('landing/home.ejs');
 };
