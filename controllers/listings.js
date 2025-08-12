@@ -56,9 +56,15 @@ module.exports.updateListing = async (req, res) => {
     throw new ExpressError(400, 'Invalid Listing Data');
   }
   let { id } = req.params;
-  await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+  let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+  
+  if(typeof req.file !== "undefined"){
+  let url = req.file.path;
+  let filename = req.file.filename;
+  listing.image={ url, filename };
+  await listing.save();
+  }
   req.flash('success', 'Listing Updated!');
-  console.log('meow');
   res.redirect(`/listings/${id}`);
 };
 
@@ -70,7 +76,9 @@ module.exports.editLisitng = async (req, res) => {
     req.flash('error', 'Lisitng you requested does not exist!');
     res.redirect('/listings');
   }
-  res.render('listings/edit.ejs', { listing });
+  let ogImageURL = listing.image.url;
+  ogImageURL = ogImageURL = ogImageURL.replace('/upload', '/upload/w_250');
+  res.render('listings/edit.ejs', { listing, ogImageURL});
 };
 
 // Render the form for creating a new listing

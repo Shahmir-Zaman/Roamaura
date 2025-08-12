@@ -17,8 +17,12 @@
         </div>
 
         <div class="mb-3">
-          <label for="image" class="form-lable">Image Link</label>
-          <input name="listing[image]" value="<%=listing.image.url%>" type="text" class="form-control" />
+            <img src="<%=ogImageURL%>"/>
+          </div>
+
+        <div class="mb-3">
+          <label for="image" class="form-lable">Upload New Image </label>
+          <input name="listing[image]" type="file" class="form-control" />
         </div>
 
         <div class="row">
