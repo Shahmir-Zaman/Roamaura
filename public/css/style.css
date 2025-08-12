@@ -494,6 +494,13 @@ ing Page Styles */
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
+/* Map */
+#map {
+  height: 400px;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
 /* Animations */
 @keyframes slideInLeft {
   from {
