@@ -12,6 +12,7 @@ body {
 .navbar {
   height: 5rem;
   background-color: #f8f9fa;
+  z-index: 1050;
 }
 
 .fa-compass {
@@ -53,7 +54,7 @@ body {
 /* Cards */
 .listing-card {
   border: none !important;
-  width: 18rem;
+  width: 18rem !important;
   margin-bottom: 2rem;
   transition:
     transform 0.3s ease,
@@ -108,9 +109,25 @@ body {
   line-height: 3vh;
 }
 
-/* Card Animations */
-.card:hover {
+/* Card Animations - Only for listing cards, not show page */
+.listing-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Show page cards - no hover animation */
+.show-page .card {
+  transition: none;
+}
+
+.show-page .card:hover {
+  transform: none;
+  box-shadow: inherit;
+}
+
+/* Review cards - keep hover animation */
+.review-card:hover {
+  transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -191,13 +208,9 @@ body {
   animation: fadeIn 0.8s ease-out;
 }
 
-/* Show Page Image Animation */
+/* Show Page Image - Remove hover animation */
 .show-img {
-  transition: transform 0.5s ease;
-}
-
-.show-img:hover {
-  transform: scale(1.02);
+  /* Removed hover animation */
 }
 
 /* Price Tag Animation */
@@ -501,6 +514,11 @@ ing Page Styles */
   margin-bottom: 2rem;
 }
 
+/* Ensure proper spacing */
+.container-lg {
+  margin-top: 2rem;
+}
+
 /* Animations */
 @keyframes slideInLeft {
   from {
@@ -603,6 +621,16 @@ ing Page Styles */
   }
 }
 
+/* FIlter Bar*/
+.filter-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.filter-link:hover {
+  text-decoration: none;
+  color: inherit;
+}
 
 #filters {
   display: flex;
@@ -625,14 +653,13 @@ ing Page Styles */
   position: relative;
   padding: 10px 30px 10px 30px;
   /* Left padding 30px, right padding 10px */
-  height: 80px;
+  min-height: 80px;
+  align-items: center;
 }
 
 #filter-wrapper::-webkit-scrollbar {
   display: none;
 }
-
-
 
 .scroll-btn {
   background-color: white;
@@ -671,13 +698,29 @@ ing Page Styles */
 .filter {
   flex-shrink: 0;
   text-align: center;
-  margin-right: 1 rem;
+  margin-right: 1rem;
   margin-top: 0;
-  /* Remove top margin to prevent cutoff */
   opacity: 0.7;
   padding: 10px 5px;
-  /* Add padding for better spacing */
+  min-width: 60px;
   transition: all 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter i {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.filter p {
+  margin: 5px 0 0 0;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: visible;
 }
 
 .filter:hover {
@@ -703,7 +746,7 @@ ing Page Styles */
 }
 
 .search-btn {
-  background-color: #Fe424d;
+  background-color: #fe424d;
   color: white;
   border: none;
   border-radius: 1.5rem;
