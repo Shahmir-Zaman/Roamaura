@@ -113,3 +113,59 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+
+
+let taxToggle = document.getElementById("flexSwitchCheckDefault");
+taxToggle.addEventListener("click", () => {
+  let taxInfo = document.getElementsByClassName("tax-info");
+  for (info of taxInfo) {
+    if (info.style.display != "inline") {
+      info.style.display = "inline";
+    } else {
+      info.style.display = "none";
+    }
+  }
+})
+
+// Enhanced scroll functionality with smooth animations
+const filterWrapper = document.getElementById("filter-wrapper");
+const scrollLeftBtn = document.getElementById("scroll-left");
+const scrollRightBtn = document.getElementById("scroll-right");
+
+// Smooth scroll with easing animation
+function smoothScrollTo(element, targetScrollLeft, duration = 300) {
+  const startScrollLeft = element.scrollLeft;
+  const distance = targetScrollLeft - startScrollLeft;
+  const startTime = performance.now();
+
+  function animation(currentTime) {
+    const timeElapsed = currentTime - startTime;
+    const progress = Math.min(timeElapsed / duration, 1);
+
+    // Easing function for smooth animation
+    const easeInOutCubic = progress < 0.5
+      ? 4 * progress * progress * progress
+      : (progress - 1) * (2 * progress - 2) * (2 * progress - 2) + 1;
+
+    element.scrollLeft = startScrollLeft + distance * easeInOutCubic;
+
+    if (progress < 1) {
+      requestAnimationFrame(animation);
+    }
+  }
+
+  requestAnimationFrame(animation);
+}
+
+scrollLeftBtn.addEventListener("click", () => {
+  const scrollAmount = 150; // Smaller scroll for better control
+  const targetScroll = Math.max(0, filterWrapper.scrollLeft - scrollAmount);
+  smoothScrollTo(filterWrapper, targetScroll);
+});
+
+scrollRightBtn.addEventListener("click", () => {
+  const scrollAmount = 150;
+  const maxScroll = filterWrapper.scrollWidth - filterWrapper.clientWidth;
+  const targetScroll = Math.min(maxScroll, filterWrapper.scrollLeft + scrollAmount);
+  smoothScrollTo(filterWrapper, targetScroll);
+});

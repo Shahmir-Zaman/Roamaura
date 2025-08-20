@@ -1,8 +1,14 @@
+require('dotenv').config({ path: '../.env.local' });
 const mongoose = require('mongoose');
 const initData = require('./data.js');
 const listing = require('../models/listing.js');
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 
 const MONGO_URL = 'mongodb://127.0.0.1:27017/roamora';
+const mapToken = process.env.MAP_TOKEN;
+const geocodingClient = mbxGeocoding({ accessToken: mapToken });
+
+console.log('MAP_TOKEN loaded:', mapToken ? 'YES' : 'NO');
 
 main()
   .then(() => {
@@ -18,12 +24,39 @@ async function main() {
 
 const initDB = async () => {
   await listing.deleteMany({});
-  const listingsWithOwner = initData.data.map(obj => ({
-    ...obj,
-    owner: '6891ef458bdca53311c92cb5',
-  }));
+
+  const listingsWithOwner = [];
+  for (let obj of initData.data) {
+    try {
+      console.log(`Geocoding: ${obj.location}`);
+
+      let res = await geocodingClient
+        .forwardGeocode({
+          query: obj.location,
+          limit: 1,
+        })
+        .send();
+
+      const listingsWithOwnerAndGeometry = {
+        ...obj,
+        owner: '6891ef458bdca53311c92cb5',
+        geometry: res.body.features[0].geometry,
+      };
+
+      listingsWithOwner.push(listingsWithOwnerAndGeometry);
+      console.log(`✓ Geocoded: ${obj.location}`);
+    } catch (error) {
+      console.error(`✗ Failed to geocode ${obj.location}:`, error.message);
+      // Add without geometry if geocoding fails
+      listingsWithOwner.push({
+        ...obj,
+        owner: '6891ef458bdca53311c92cb5',
+      });
+    }
+  }
+
   await listing.insertMany(listingsWithOwner);
-  console.log('Data was initialized');
+  console.log('Data was initialized with geocoding');
 };
 
 initDB();

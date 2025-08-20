@@ -1,20 +1,136 @@
 <% layout('layouts/boilerplate')-%>
 
-<h3>All Listings</h3>
+  <div id="filters">
+    <!-- Scroll Button Left -->
+    <button id="scroll-left"
+            class="scroll-btn">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
 
-<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
-  <% for (let listing of allListings){%>
-  <a href="/listings/<%=listing._id%>" class="listing-link">
-    <div class="card col listing-card" style="width: 18rem">
-      <img src="<%=listing.image.url%>" class="card-img-top" alt="listing image" style="height: 20rem" />
-      <div class="card-img-overlay"></div>
-      <div class="card-body">
-        <p class="card-text">
-          <b><%= listing.title %></b><br />
-          &#8364;<%=listing.price.toLocaleString("de-DE")%>
-        </p>
+    <div id="filter-wrapper">
+      <!-- Popular/Trending -->
+      <div class="filter">
+        <div><i class="fa-solid fa-fire"></i></div>
+        <p>Trending</p>
+      </div>
+
+      <!-- Property Types -->
+      <div class="filter">
+        <div><i class="fa-solid fa-bed"></i></div>
+        <p>Rooms</p>
+      </div>
+
+      <div class="filter">
+        <i class="fa-solid fa-house"></i>
+        <p>Villa</p>
+      </div>
+
+      <!-- Location-based -->
+      <div class="filter">
+        <i class="fa-solid fa-umbrella-beach"></i>
+        <p>Beachfront</p>
+      </div>
+
+      <div class="filter">
+        <i class="fa-solid fa-monument"></i>
+        <p>Iconic Cities</p>
+      </div>
+
+      <div class="filter">
+        <i class="fa-solid fa-chess-rook"></i>
+        <p>Castles</p>
+      </div>
+
+      <div class="filter">
+        <i class="fa-solid fa-tree"></i>
+        <p>Nature</p>
+      </div>
+
+      <!-- Amenities -->
+      <div class="filter">
+        <i class="fa-solid fa-person-swimming"></i>
+        <p>Pool</p>
+      </div>
+
+      <div class="filter">
+        <i class="fa-solid fa-kitchen-set"></i>
+        <p>Kitchen</p>
+      </div>
+
+      <div class="filter">
+        <i class="fa-solid fa-dumbbell"></i>
+        <p>Gym</p>
+      </div>
+
+      <div class="filter">
+        <i class="fa-solid fa-paw"></i>
+        <p>Pet-Friendly</p>
+      </div>
+
+      <!-- Experience/Lifestyle -->
+      <div class="filter">
+        <i class="fa-solid fa-compact-disc"></i>
+        <p>Night Life</p>
+      </div>
+
+      <!-- Price-based -->
+      <div class="filter">
+        <i class="fa-solid fa-gem"></i>
+        <p>Luxury</p>
+      </div>
+
+      <div class="filter">
+        <i class="fa-solid fa-piggy-bank"></i>
+        <p>Budget-Friendly</p>
       </div>
     </div>
-  </a>
-  <%}%>
-</div>
+
+    <!-- Scroll Button Right -->
+    <button id="scroll-right"
+            class="scroll-btn">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+    <div class="tax-toggle">
+      <div class="form-check-reverse form-switch">
+        <input class="form-check-input"
+               type="checkbox"
+               role="switch"
+               id="flexSwitchCheckDefault">
+        <label class="form-check-label"
+               for="flexSwitchCheckDefault">Display Total After Taxes</label>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+    <% for
+       (let
+       listing
+       of
+       allListings){%>
+      <a href="/listings/<%=listing._id%>"
+         class="listing-link">
+        <div class="card col listing-card"
+             style="width: 18rem">
+          <img src="<%=listing.image.url%>"
+               class="card-img-top"
+               alt="listing image"
+               style="height: 20rem" />
+          <div class="card-img-overlay"></div>
+          <div class="card-body">
+            <p class="card-text">
+              <b>
+                <%= listing.title
+                    %>
+              </b><br />
+              &#8364;<%=listing.price.toLocaleString("de-DE")%>
+                <i class="tax-info">&nbsp;+7%tax</i>
+            </p>
+          </div>
+        </div>
+      </a>
+      <%}%>
+  </div>
