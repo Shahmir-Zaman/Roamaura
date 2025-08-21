@@ -7,8 +7,21 @@ const geocodingClient=mbxGeocoding({accessToken:mapToken});
 
 //Showing All Listings
 module.exports.index = async (req, res) => {
-  const allListings = await Listing.find({});
-  res.render('listings/index.ejs', { allListings });
+  const { category } = req.query; // Get category from query string
+  
+  console.log('Category from query:', category); // Debug log
+  
+  let filter = {};
+  if (category) {
+    filter.categories = { $in: [category] };
+  }
+  
+  console.log('Filter being used:', filter); // Debug log
+  
+  const allListings = await Listing.find(filter);
+  console.log('Found listings:', allListings.length); // Debug log
+  
+  res.render('listings/index.ejs', { allListings, currentCategory: category || null });
 };
 
 //Showing a single listing
@@ -103,3 +116,5 @@ module.exports.deleteListing = async (req, res) => {
   console.log(deletedListing);
   res.redirect('/listings');
 };
+
+

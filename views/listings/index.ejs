@@ -176,3 +176,12 @@
       </a>
       <%}%>
   </div>
+
+<script>
+  document.getElementById('flexSwitchCheckDefault').addEventListener('change', function() {
+    const taxInfoElements = document.querySelectorAll('.tax-info');
+    taxInfoElements.forEach(element => {
+      element.style.display = this.checked ? 'inline' : 'none';
+    });
+  });
+</script>
