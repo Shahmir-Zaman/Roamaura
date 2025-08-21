@@ -9,18 +9,11 @@ const geocodingClient=mbxGeocoding({accessToken:mapToken});
 module.exports.index = async (req, res) => {
   const { category } = req.query; // Get category from query string
   
-  console.log('Category from query:', category); // Debug log
-  
   let filter = {};
   if (category) {
     filter.categories = { $in: [category] };
   }
-  
-  console.log('Filter being used:', filter); // Debug log
-  
   const allListings = await Listing.find(filter);
-  console.log('Found listings:', allListings.length); // Debug log
-  
   res.render('listings/index.ejs', { allListings, currentCategory: category || null });
 };
 
@@ -59,9 +52,9 @@ module.exports.createLisitng = async (req, res, next) => {
     newListing.image = { url, filename };
     newListing.geometry=response.body.features[0].geometry;
 
-    console.log('New listing before save:', newListing);
+
     await newListing.save();
-    console.log('New listing saved successfully!');
+    
 
     req.flash('success', 'New listing Created!');
     res.redirect('/listings');
@@ -117,4 +110,8 @@ module.exports.deleteListing = async (req, res) => {
   res.redirect('/listings');
 };
 
+// Search Listings
+module.exports.searchListings = async (req, res) => {
+  const { query } = req.query;
 
+};

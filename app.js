@@ -10,6 +10,7 @@ const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const ExpressError = require('./utils/ExpressError.js');
 const session = require('express-session');
+const MongoStrore = require('connect-mongo');
 const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
@@ -21,7 +22,9 @@ const userRouter = require('./routes/user.js'); // Import the user route
 const landingRouter = require('./routes/landing.js'); // Import the landing route
 
 //Connecting to MongoDB
-const MONGO_URL = 'mongodb://127.0.0.1:27017/roamora';
+const MONGO_URL = process.env.MongoURl;
+const sessionSecret=  process.env.SECRET;
+
 
 main()
   .then(() => {
@@ -42,8 +45,22 @@ app.use(methodOverride('_method'));
 app.engine('ejs', ejsMate); // to use ejs-mate as the template engine
 app.use(express.static(path.join(__dirname, 'public'))); // to use public folder as static files
 
+// Session and Flash setup
+const store = MongoStrore.create({
+  mongoUrl: MONGO_URL,
+  crypto:{
+    secret: sessionSecret,
+  },
+  touchAfter: 24 * 3600, // time in seconds
+});
+
+store.on('error', function (e) {
+  console.log('Session Store Error', e);
+});
+
 const sessionOptions = {
-  secret: 'MySuperSecretKey',
+  store,
+  secret: sessionSecret,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -52,6 +69,7 @@ const sessionOptions = {
     httpOnly: true,
   },
 };
+
 
 app.use(session(sessionOptions));
 app.use(flash());

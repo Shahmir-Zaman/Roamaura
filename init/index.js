@@ -4,7 +4,8 @@ const initData = require('./data.js');
 const listing = require('../models/listing.js');
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 
-const MONGO_URL = 'mongodb://127.0.0.1:27017/roamora';
+
+const MONGO_URL = process.env.MongoURl;
 const mapToken = process.env.MAP_TOKEN;
 const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
